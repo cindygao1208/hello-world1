@@ -1,0 +1,26 @@
+//1. implement function add(a,b,c...)
+//add(3); //return 3
+//add(3,4) //return 7
+//add(3,4,5) //return 12
+
+function add(a,b,c) {
+  var add(3);
+  return a;
+}
+
+function add(a,b,c) {
+  var add(3,4);
+  return a+b;
+}
+
+function add(a,b,c) {
+  var add(3,4,5);
+  return a+b+c;
+}
+
+//2. implement function max(a,b,c...)
+//max(3); // returns 3
+//max(3, 4);  // returns 4
+//max(3, 4, 5);  // returns 5
+
+function max(a,b,c)
