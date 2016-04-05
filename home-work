@@ -1,5 +1,5 @@
 function sayHi() {
-  for (var i=0; i<arguments.length; i++ {
+  for (var i=0; i<arguments.length; i++) {
     alert("Hi", + arguments[i]);
   }
 }
@@ -40,3 +40,7 @@ function max(a,b,c) {
 }
 max(3, 4, 5) // 5
 
+//3. You have the following JavaScript code. Write the appropriate HTML so all three statements are equivalent (will bring the same value).
+//document.forms["myForm"].elements["myField"].value
+//document.forms[1].elements[1].value
+//document.myForm.myField.value
