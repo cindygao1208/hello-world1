@@ -3,7 +3,6 @@ function sayHi() {
     alert("Hi", + arguments[i]);
   }
 }
-
 sayHi("Cat", "Alice") // 'Hi, Cat', then 'Hi, Alice'
 
 //1. implement function add(a,b,c...)
@@ -18,11 +17,26 @@ function add(a,b,c) {
      alert(total);
   }
 }
- add(3, 4, 5) // 3, 7, 12
+add(3, 4, 5) // 3, 7, 12
  
  
 //2. implement function max(a,b,c...)
 //max(3); // returns 3
 //max(3, 4);  // returns 4
 //max(3, 4, 5);  // returns 5
+
+function max(a,b,c) {
+  var biggest;
+  for (var i=0; i<arguments.length; i++) {
+     if (i==0)
+       biggest = arguments[i];
+      else {
+        if (arguments[i]>biggest) {
+          biggest=arguments[i];
+        }
+     }
+  }
+  alert(biggest);
+}
+max(3, 4, 5) // 5
 
