@@ -52,8 +52,9 @@ max(3, 4, 5) // 5
 </head>
 <body>
 <form id="myForm">
+The content of the document
+
 My Field<input type="text" id="myField">  
-The content of the document......
 </form>
 </body>
 </html>
