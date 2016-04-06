@@ -30,9 +30,9 @@ function max(a,b,c) {
   for (var i=0; i<arguments.length; i++) {
      if (i==0)
        biggest = arguments[i];
-      else {
+     else {
         if (arguments[i]>biggest) {
-          biggest=arguments[i];
+           biggest=arguments[i];
         }
      }
   }
@@ -44,3 +44,20 @@ max(3, 4, 5) // 5
 //document.forms["myForm"].elements["myField"].value
 //document.forms[1].elements[1].value
 //document.myForm.myField.value
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Title of the document</title>
+</head>
+<body>
+<form name=document>
+The content of the document......
+</form>
+</body>
+</html>
+
+//4. Read the API on object String and Array.
+//http://docs.sencha.com/extjs/4.2.1/#!/api/Stringhttp://docs.sencha.com/extjs/4.2.1/#!/api/Array
+//Then write a one-line function (less than 80 characters) that returns a boolean indicating 
+//whether or not a string is a palindrome. e.g. "A nut for a jar of tuna." is a palindrome. (Java API)
