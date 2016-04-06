@@ -102,7 +102,7 @@ sum(3)(4) //7
 //        a2 = num;
 //      }
 //    }
-//  }); //here is not match. only closing ")"
+//  }); //here is not match. only closing ")" which is not useful
 //  return (Math.min(a1, a2));
 //}
 
