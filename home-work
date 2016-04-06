@@ -67,22 +67,21 @@ My Field<input type="text" id="myField">
 
 //5. Read this article then run the following code in a browser and explain the result.
 //http://ryanmorr.com/understanding-scope-and-context-in-javascript/
-//var myObject = {
-//  foo: "bar",
-//  func: function() {
-//    var self = this;
-//    console.log("outer func:  this.foo = " + this.foo);
-//    console.log("outer func:  self.foo = " + self.foo);
-//    (function() {
-//      console.log("inner func:  this.foo = " + this.foo);
-//      console.log("inner func:  self.foo = " + self.foo);
-//    })();
-//  }
-//};
-//myObject.func();
-//var test = myObject.func;
-//test();
-
+var myObject = {
+  foo: "bar",
+  func: function() {
+    var self = this;
+    console.log("outer func:  this.foo = " + this.foo);
+    console.log("outer func:  self.foo = " + self.foo);
+    (function() {
+      console.log("inner func:  this.foo = " + this.foo);
+      console.log("inner func:  self.foo = " + self.foo);
+    })();
+  }
+};
+myObject.func();
+var test = myObject.func;
+test();
 
 //6.	Implement the following function. It should return the sum of the two numbers:
 //sum(3)(4); // returns 7
@@ -92,3 +91,21 @@ function sum(a)(b) {
 }
 sum(3)(4) //7
 
+//7. Tell me what the function below does. Do you see the bug?
+//function foo(arr) {
+//  var a1 = -Infinity, a2 = -Infinity;
+//  arr.forEach(function(num) {
+//    if (num > Math.min(a1, a2)) {
+//      if (a1 < a2) {
+//        a1 = num;
+//      } else {
+//        a2 = num;
+//      }
+//    }
+//  }); //here is not match. only closing ")"
+//  return (Math.min(a1, a2));
+//}
+
+//8. Explain what is MVC
+//MVC (Model, View, Controller) is a pattern for organising code in an application to improve maintainability.
+//MVC is one of three ASP.NET programming models. MVC is a framework for building web applications using a MVC (Model View Controller) design: The Model represents the application core (for instance a list of database records). The View displays the data (the database records).
