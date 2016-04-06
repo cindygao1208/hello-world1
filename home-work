@@ -5,10 +5,10 @@ function sayHi() {
 }
 sayHi("Cat", "Alice") // 'Hi, Cat', then 'Hi, Alice'
 
-//1. implement function add(a,b,c...)
-//add(3); //return 3
-//add(3,4) //return 7
-//add(3,4,5) //return 12
+<! 1. implement function add(a,b,c...)>
+<! add(3); //return 3 >
+<! add(3,4) //return 7 >
+<! add(3,4,5) //return 12 >
 
 function add(a,b,c) {
   var total=0;
