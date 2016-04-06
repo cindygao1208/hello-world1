@@ -51,7 +51,8 @@ max(3, 4, 5) // 5
 <title>Title of the document</title>
 </head>
 <body>
-<form name=myForm>
+<form id="myForm">
+My Field<input id="myField">  
 The content of the document......
 </form>
 </body>
