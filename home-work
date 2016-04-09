@@ -60,7 +60,8 @@ My Field<input type="text" id="myField">
 </html>
 
 //4. Read the API on object String and Array.
-//http://docs.sencha.com/extjs/4.2.1/#!/api/Stringhttp://docs.sencha.com/extjs/4.2.1/#!/api/Array
+//http://docs.sencha.com/extjs/4.2.1/#!/api/String
+//http://docs.sencha.com/extjs/4.2.1/#!/api/Array
 //Then write a one-line function (less than 80 characters) that returns a boolean indicating 
 //whether or not a string is a palindrome. e.g. "A nut for a jar of tuna." is a palindrome. (Java API)
 
