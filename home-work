@@ -97,7 +97,7 @@ function sum(a,b) {
 }
 sum(3)(4) //7
 
-//7. Tell me what the function below does. Do you see the bug?
+//7. Tell me what the function below does. Do you see the bug? A: Finding the min number.
 //function foo(arr) {
 //  var a1 = -Infinity, a2 = -Infinity;
 //  arr.forEach(function(num) {
