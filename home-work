@@ -103,7 +103,7 @@ sum(3,4) //7
 //function foo(arr) {
 //  var a1 = -Infinity, a2 = -Infinity;
 //  arr.forEach(function(num) {
-//    if (num > Math.min(a1, a2)) {  //use max
+//    if (num > Math.min(a1, a2)) {  
 //      if (a1 < a2) {
 //        a1 = num;
 //      } else 
@@ -113,6 +113,17 @@ sum(3,4) //7
 //  });
 //  return (Math.min(a1, a2));
 //}
+foo(3,1,5,8);
+
+function foo1(arr) {
+  var a1 = arr[0];
+  arr.forEach(function(num) {
+    if (num < a1) {
+      a1=num;
+    }
+  });
+  return a1;
+}
 
 //8. Explain what is MVC
 //MVC (Model, View, Controller) is a pattern for organising code in an application to improve maintainability.
