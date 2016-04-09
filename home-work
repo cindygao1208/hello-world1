@@ -84,7 +84,7 @@ var myObject = {
   }
 };
 myObject.func(); 
-var test = myObject.func; 
+var test = myObject.func; // if var test = myObject.func(); result is the same
 test(); //all undefined -because "this" is undefined
 
 //6.	Implement the following function. It should return the sum of the two numbers:
