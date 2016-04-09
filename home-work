@@ -91,7 +91,8 @@ test();
 //sum(3)(4); // returns 7
 
 function sum(a)(b) {
-  var total=x=>y=>x+y;
+  var total=a=>b=>a+b;
+  return total;
 }
 sum(3)(4) //7
 
