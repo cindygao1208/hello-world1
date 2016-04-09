@@ -3,7 +3,7 @@ function sayHi() {
     alert("Hi", + arguments[i]);
   }
 }
-sayHi("Cat", "Alice") // 'Hi, Cat', then 'Hi, Alice'
+sayHi("Cat", "Alice"); // 'Hi, Cat', then 'Hi, Alice'
 
 //1. implement function add(a,b,c...)
 //add(3); //return 3 
@@ -17,7 +17,7 @@ function add(a,b,c) {
      alert(total);
   }
 }
-add(3, 4, 5) // 3, 7, 12
+add(3, 4, 5); // 3, 7, 12
  
  
 //2. implement function max(a,b,c...)
@@ -38,7 +38,7 @@ function max(a,b,c) {
   }
   alert(biggest);
 }
-max(3, 4, 5) // 5
+max(3, 4, 5); // 5
 
 //3. You have the following JavaScript code. Write the appropriate HTML so all three statements are equivalent (will bring the same value).
 //document.forms["myForm"].elements["myField"].value
@@ -67,7 +67,7 @@ My Field<input type="text" id="myField">
 function isPalindrome(x) {
   return(x == x.split('').reverse().join(''));
 }
-isPalindrome("abcdefg");
+console.log(isPalindrome("abcdefg"));
 
 //5. Read this article then run the following code in a browser and explain the result.
 //http://ryanmorr.com/understanding-scope-and-context-in-javascript/
@@ -90,29 +90,30 @@ test(); //all undefined -because "this" is undefined
 //6.	Implement the following function. It should return the sum of the two numbers:
 //sum(3)(4); // returns 7
 
-function sum(a)(b) {
+function sum(a,b) {
   var total=0;
   for (var i=0; i<arguments.length; i++) {
-     total += arguments[i];
-     alert(total);
+     total += arguments[i];  
   }
+  alert(total);
 }
-sum(3)(4) //7
+sum(3,4); //7
+
 
 //7. Tell me what the function below does. Do you see the bug? A: Finding the min number.
-//function foo(arr) {
-//  var a1 = -Infinity, a2 = -Infinity;
-//  arr.forEach(function(num) {
-//    if (num > Math.min(a1, a2)) {  
-//      if (a1 < a2) {
-//        a1 = num;
-//      } else 
-//        a2 = num;
-//      }
-//    }
-//  });
-//  return (Math.min(a1, a2));
-//}
+function foo(arr) {
+  var a1 = -Infinity, a2 = -Infinity;
+  arr.forEach(function(num) {
+    if (num > Math.min(a1, a2)) {  
+      if (a1 < a2) {
+        a1 = num;
+      } else 
+        a2 = num;
+      }
+    }
+  });
+  return (Math.min(a1, a2));
+}
 foo(3,1,5,8);
 
 function foo1(arr) {
