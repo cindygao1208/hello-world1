@@ -75,17 +75,17 @@ var myObject = {
   foo: "bar",
   func: function() {
     var self = this;
-    console.log("outer func:  this.foo = " + this.foo);
-    console.log("outer func:  self.foo = " + self.foo);
+    console.log("outer func:  this.foo = " + this.foo); //bar
+    console.log("outer func:  self.foo = " + self.foo); //bar
     (function() {
-      console.log("inner func:  this.foo = " + this.foo);
-      console.log("inner func:  self.foo = " + self.foo);
+      console.log("inner func:  this.foo = " + this.foo); //undefined
+      console.log("inner func:  self.foo = " + self.foo); //bar
     })();
   }
 };
-myObject.func();
-var test = myObject.func;
-test();
+myObject.func(); 
+var test = myObject.func; 
+test(); //all undefined -because "this" is undefined
 
 //6.	Implement the following function. It should return the sum of the two numbers:
 //sum(3)(4); // returns 7
