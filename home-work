@@ -84,14 +84,15 @@ var myObject = {
   }
 };
 myObject.func(); 
-var test = myObject.func; // if var test = myObject.func(); result is the same
+var test = myObject.func; 
 test(); //all undefined -because "this" is undefined
 
 //6.	Implement the following function. It should return the sum of the two numbers:
 //sum(3)(4); // returns 7
 
-function sum(a)(b) {
-  var total=a=>b=>a+b;
+var sum =a=>b=>a+b;
+function sum(a,b) {
+  var total=a+b;
   return total;
 }
 sum(3)(4) //7
@@ -100,14 +101,14 @@ sum(3)(4) //7
 //function foo(arr) {
 //  var a1 = -Infinity, a2 = -Infinity;
 //  arr.forEach(function(num) {
-//    if (num > Math.min(a1, a2)) {
+//    if (num > Math.min(a1, a2)) {  //use max
 //      if (a1 < a2) {
 //        a1 = num;
-//      } else {
+//      } else 
 //        a2 = num;
 //      }
 //    }
-//  }); //closing ")" here is not match which is not useful
+//  });
 //  return (Math.min(a1, a2));
 //}
 
