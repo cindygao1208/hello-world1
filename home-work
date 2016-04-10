@@ -90,15 +90,12 @@ test(); //all undefined -because "this" is undefined
 //6.	Implement the following function. It should return the sum of the two numbers:
 //sum(3)(4); // returns 7
 
-function sum(a,b) {
-  var total=0;
-  for (var i=0; i<arguments.length; i++) {
-     total += arguments[i];  
-  }
-  alert(total);
-}
-sum(3,4); //7
-
+var sum = function(x) {
+return function(y) {
+	return x + y;
+	};
+};
+alert(sum(3)(4)); //7
 
 //7. Tell me what the function below does. Do you see the bug? A: Finding the min number.
 function foo(arr) {
