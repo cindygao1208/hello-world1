@@ -67,7 +67,7 @@ My Field<input type="text" id="myField">
 function isPalindrome(x) {
   return(x == x.split('').reverse().join(''));
 }
-console.log(isPalindrome("A nut for a jar of tuna"));
+console.log(isPalindrome("anutforajaroftuna"));
 
 //5. Read this article then run the following code in a browser and explain the result.
 //http://ryanmorr.com/understanding-scope-and-context-in-javascript/
