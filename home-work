@@ -1,7 +1,7 @@
 function sayHi() {
-  for (var i=0; i<arguments.length; i++) {
-    alert("Hi", + arguments[i]);
-  }
+    for (var i=0; i<arguments.length; i++) {
+        alert("Hi", + arguments[i]);
+    }
 }
 sayHi("Cat", "Alice"); // 'Hi, Cat', then 'Hi, Alice'
 
@@ -11,11 +11,11 @@ sayHi("Cat", "Alice"); // 'Hi, Cat', then 'Hi, Alice'
 //add(3,4,5) //return 12 
 
 function add(a,b,c) {
-  var total=0;
-  for (var i=0; i<arguments.length; i++) {
-     total += arguments[i];
-     alert(total);
-  }
+    var total=0;
+    for (var i=0; i<arguments.length; i++) {
+        total += arguments[i];
+        alert(total);
+    }
 }
 add(3, 4, 5); // 3, 7, 12
  
@@ -26,15 +26,15 @@ add(3, 4, 5); // 3, 7, 12
 //max(3, 4, 5);  // returns 5
 
 function max() {
-  var biggest;
-  for (var i=0; i<arguments.length; i++) {
-     if (i==0)
-       biggest = arguments[i];
-     else {
-        if (arguments[i]>biggest) {
-           biggest=arguments[i];
+    var biggest;
+    for (var i=0; i<arguments.length; i++) {
+        if (i==0)
+            biggest = arguments[i];
+        else {
+            if (arguments[i]>biggest) {
+               biggest=arguments[i];
+            }
         }
-     }
   }
   alert(biggest);
 }
@@ -72,16 +72,16 @@ console.log(isPalindrome("anutforajaroftuna"));
 //5. Read this article then run the following code in a browser and explain the result.
 //http://ryanmorr.com/understanding-scope-and-context-in-javascript/
 var myObject = {
-  foo: "bar",
-  func: function() {
-    var self = this;
-    console.log("outer func:  this.foo = " + this.foo); //bar
-    console.log("outer func:  self.foo = " + self.foo); //bar
-    (function() {
-      console.log("inner func:  this.foo = " + this.foo); //undefined
-      console.log("inner func:  self.foo = " + self.foo); //bar
-    })();
-  }
+    foo: "bar",
+    func: function() {
+        var self = this;
+        console.log("outer func:  this.foo = " + this.foo); //bar
+        console.log("outer func:  self.foo = " + self.foo); //bar
+        (function() {
+             console.log("inner func:  this.foo = " + this.foo); //undefined
+             console.log("inner func:  self.foo = " + self.foo); //bar
+        })();
+    }
 };
 myObject.func(); 
 var test = myObject.func; 
@@ -99,28 +99,28 @@ alert(sum(3)(4)); //7
 
 //7. Tell me what the function below does. Do you see the bug? A: Finding the min number.
 function foo(arr) {
-  var a1 = -Infinity, a2 = -Infinity;
-  arr.forEach(function(num) {
-    if (num > Math.min(a1, a2)) {
-      if (a1 < a2) {
-        a1 = num;
-      } else {
-        a2 = num;
-      }
-    }
-  });
-  return (Math.min(a1, a2)); //should use return (Math.max(a1,a2)); find the max number.
+    var a1 = -Infinity, a2 = -Infinity;
+    arr.forEach(function(num) {
+        if (num > Math.min(a1, a2)) {
+            if (a1 < a2) {
+                a1 = num;
+            } else {
+                a2 = num;
+            }
+        }
+    });
+    return (Math.min(a1, a2)); //should use return (Math.max(a1,a2)); find the max number.
 }
 console.log(foo([3,1,5,8,9,10]));
 
 function foo1(arr) {
-  var a1 = arr[0];
-  arr.forEach(function(num) {
-    if (num < a1) {
-      a1=num;
-    }
-  });
-  return a1;
+    var a1 = arr[0];
+    arr.forEach(function(num) {
+        if (num < a1) {
+            a1=num;
+        }
+    });
+    return a1;
 }
 
 //8. Explain what is MVC
