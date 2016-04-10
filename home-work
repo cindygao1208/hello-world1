@@ -109,9 +109,9 @@ function foo(arr) {
       }
     }
   });
-  return (Math.min(a1, a2));
+  return (Math.min(a1, a2)); //should use return (Math.max(a1,a2)); find the max number.
 }
-console.log(foo([3,1,5,8]));
+console.log(foo([3,1,5,8,9,10]));
 
 function foo1(arr) {
   var a1 = arr[0];
