@@ -25,7 +25,7 @@ add(3, 4, 5); // 3, 7, 12
 //max(3, 4);  // returns 4
 //max(3, 4, 5);  // returns 5
 
-function max(a,b,c) {
+function max() {
   var biggest;
   for (var i=0; i<arguments.length; i++) {
      if (i==0)
