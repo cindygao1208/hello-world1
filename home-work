@@ -101,17 +101,17 @@ alert(sum(3)(4)); //7
 function foo(arr) {
   var a1 = -Infinity, a2 = -Infinity;
   arr.forEach(function(num) {
-    if (num > Math.min(a1, a2)) {  
+    if (num > Math.min(a1, a2)) {
       if (a1 < a2) {
         a1 = num;
-      } else 
+      } else {
         a2 = num;
       }
     }
   });
   return (Math.min(a1, a2));
 }
-foo(3,1,5,8);
+console.log(foo([3,1,5,8]));
 
 function foo1(arr) {
   var a1 = arr[0];
