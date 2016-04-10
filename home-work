@@ -124,5 +124,6 @@ function foo1(arr) {
 }
 
 //8. Explain what is MVC
-//MVC (Model, View, Controller) is a pattern for organising code in an application to improve maintainability.
-//MVC is one of three ASP.NET programming models. MVC is a framework for building web applications using a MVC (Model View Controller) design: The Model represents the application core (for instance a list of database records). The View displays the data (the database records).
+//MVC (Model, View, Controller) MVC is a software architecture - the structure of the system - that separates 
+//domain/application/business (whatever you prefer) logic from the rest of the user interface. It does this by 
+//separating the application into three parts: the model, the view, and the controller.
