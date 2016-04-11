@@ -127,3 +127,23 @@ function foo1(arr) {
 //MVC (Model, View, Controller) MVC is a software architecture - the structure of the system - that separates 
 //domain/application/business (whatever you prefer) logic from the rest of the user interface. It does this by 
 //separating the application into three parts: the model, the view, and the controller.
+
+//Addrees book
+//Challenge:
+//Build a mini address book to showcase your JavaScript and DOM talents.
+
+//Objectives:
+//- the app will consist of a form with input elements to add new contacts and a multi select element to list them.
+//- create input elements so that the user can add a 'name' and a 'telephone' value for a new contact and click 'add' button which adds user to the multi select box.
+//    - data in each select option tag can be stored anyway you like - there are many ways, so get creative
+//- once contacts exist in the multi-select tag, the user should be able to select and press a 'delete' button to remove multiple at a time
+//- add a button to sort contacts by name in the multi select box
+//- add another button to sort contacts by telephone in the select box
+//
+//Bonus: 
+//- use additional fields aside from name and telephone and allow sorting on them, ie: last name
+//- use native javascript or jquery to generate all DOM elements
+//
+//Restrictions:
+//- the application is to be written in a single index.html file
+//- optionally include a single style.css, scripts.js, and just jQuery - no other libraries/framkeworks are permitted
