@@ -147,3 +147,87 @@ function foo1(arr) {
 //Restrictions:
 //- the application is to be written in a single index.html file
 //- optionally include a single style.css, scripts.js, and just jQuery - no other libraries/framkeworks are permitted
+
+<!DOCTYPE html>
+<!-- saved from url=(0045)file:///C:/Users/xianl/Downloads/angular.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style></head><body>
+<script src="./Address book_files/angular.min.js"></script>
+
+<script>
+	var app = angular.module('addressBook', []);
+	app.controller('addressBookControl', function($scope,$http) {
+		$scope.submit="Submit";
+		$scope.remove="Remove";
+		$scope.load="Load";
+		$scope.save="Save";
+		$scope.error="";
+		$scope.persons=[
+			{firstName:'Jani',lastName:'Norway'},
+			{firstName:'Hege',lastName:'Sweden'},
+			{firstName:'Kai',lastName:'Denmark'}];
+		$scope.doSubmit=function($firstName, $lastName) {
+			var newPerson = {firstName: $firstName, lastName: $lastName};
+			$scope.persons.push(newPerson);
+		};
+		$scope.doRemove=function($firstName, $lastName) {
+			var i, person;
+			for(i = 0; i < $scope.persons.length; i++) {
+				person = $scope.persons[i];
+				if(person.firstName == $firstName && person.lastName == $lastName) {
+					$scope.persons.splice(i,1);
+				}
+			}
+			$scope.person.firstName="";
+			$scope.person.lastName="";
+		};
+		$scope.doLoad=function() {
+			$http.jsonp("data.json").then(function(response) {
+				$scope.persons=response.data;
+			}, function(response) {
+				$scope.error="shit hit the fan";
+			});
+		};
+		$scope.doSave=function() {
+			filename='data.json';
+			data = JSON.stringify($scope.persons);
+			var blob = new Blob([data], {type: 'text/json'}),
+				e = document.createEvent('MouseEvents'),
+				a = document.createElement('a');
+
+			a.download = filename;
+			a.href = window.URL.createObjectURL(blob);
+			a.dataset.downloadurl = ['text/json', a.download, a.href].join(':');
+			e.initEvent('click', true, false, window,
+			  0, 0, 0, 0, 0, false, false, false, false, 0, null);
+			a.dispatchEvent(e);
+		};
+	});
+</script>
+
+
+<div ng-app="addressBook" ng-controller="addressBookControl" name="nameForm" class="ng-scope">
+
+ 	<p>First Name: <input type="text" ng-model="person.firstName" class="ng-pristine ng-untouched ng-valid"></p>
+	<p>Last Name: <input type="text" ng-model="person.lastName" class="ng-pristine ng-untouched ng-valid"></p>
+	
+ 	<table>
+		<tbody><!-- ngRepeat: x in persons | filter : person --><tr ng-repeat="x in persons | filter : person" class="ng-scope">
+			<td class="ng-binding">Jani</td>
+			<td class="ng-binding">Norway</td>
+		</tr><!-- end ngRepeat: x in persons | filter : person --><tr ng-repeat="x in persons | filter : person" class="ng-scope">
+			<td class="ng-binding">Hege</td>
+			<td class="ng-binding">Sweden</td>
+		</tr><!-- end ngRepeat: x in persons | filter : person --><tr ng-repeat="x in persons | filter : person" class="ng-scope">
+			<td class="ng-binding">Kai</td>
+			<td class="ng-binding">Denmark</td>
+		</tr><!-- end ngRepeat: x in persons | filter : person -->
+	</tbody></table>
+	<p>
+	<button ng-model="submit" ng-click="doSubmit(person.firstName, person.lastName)" class="ng-pristine ng-untouched ng-valid ng-binding">Submit</button>
+	<button ng-model="remove" ng-click="doRemove(person.firstName, person.lastName)" class="ng-pristine ng-untouched ng-valid ng-binding">Remove</button>
+	<button ng-model="load" ng-click="doLoad()" class="ng-pristine ng-untouched ng-valid ng-binding">Load</button>
+	<button ng-model="save" ng-click="doSave()" class="ng-pristine ng-untouched ng-valid ng-binding">Save</button>
+	</p><p>
+	<span ng-model="error" class="ng-pristine ng-untouched ng-valid ng-binding"></span>
+</p></div>
+</body></html>
