@@ -149,9 +149,11 @@ function foo1(arr) {
 //- optionally include a single style.css, scripts.js, and just jQuery - no other libraries/framkeworks are permitted
 
 <!DOCTYPE html>
-<!-- saved from url=(0045)file:///C:/Users/xianl/Downloads/angular.html -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style></head><body>
-<script src="./Address book_files/angular.min.js"></script>
+<html>
+
+
+<body>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
 <script>
 	var app = angular.module('addressBook', []);
@@ -205,29 +207,25 @@ function foo1(arr) {
 </script>
 
 
-<div ng-app="addressBook" ng-controller="addressBookControl" name="nameForm" class="ng-scope">
+<div ng-app="addressBook" ng-controller="addressBookControl" name="nameForm">
 
- 	<p>First Name: <input type="text" ng-model="person.firstName" class="ng-pristine ng-untouched ng-valid"></p>
-	<p>Last Name: <input type="text" ng-model="person.lastName" class="ng-pristine ng-untouched ng-valid"></p>
+ 	<p>First Name: <input type="text" ng-model="person.firstName"></p>
+	<p>Last Name: <input type="text" ng-model="person.lastName"></p>
 	
  	<table>
-		<tbody><!-- ngRepeat: x in persons | filter : person --><tr ng-repeat="x in persons | filter : person" class="ng-scope">
-			<td class="ng-binding">Jani</td>
-			<td class="ng-binding">Norway</td>
-		</tr><!-- end ngRepeat: x in persons | filter : person --><tr ng-repeat="x in persons | filter : person" class="ng-scope">
-			<td class="ng-binding">Hege</td>
-			<td class="ng-binding">Sweden</td>
-		</tr><!-- end ngRepeat: x in persons | filter : person --><tr ng-repeat="x in persons | filter : person" class="ng-scope">
-			<td class="ng-binding">Kai</td>
-			<td class="ng-binding">Denmark</td>
-		</tr><!-- end ngRepeat: x in persons | filter : person -->
-	</tbody></table>
+		<tr ng-repeat="x in persons | filter : person">
+			<td>{{ x.firstName}}</td>
+			<td>{{x.lastName}}</td>
+		</tr>
+	</table>
 	<p>
-	<button ng-model="submit" ng-click="doSubmit(person.firstName, person.lastName)" class="ng-pristine ng-untouched ng-valid ng-binding">Submit</button>
-	<button ng-model="remove" ng-click="doRemove(person.firstName, person.lastName)" class="ng-pristine ng-untouched ng-valid ng-binding">Remove</button>
-	<button ng-model="load" ng-click="doLoad()" class="ng-pristine ng-untouched ng-valid ng-binding">Load</button>
-	<button ng-model="save" ng-click="doSave()" class="ng-pristine ng-untouched ng-valid ng-binding">Save</button>
-	</p><p>
-	<span ng-model="error" class="ng-pristine ng-untouched ng-valid ng-binding"></span>
-</p></div>
-</body></html>
+	<button ng-model="submit" ng-click="doSubmit(person.firstName, person.lastName)">{{submit}}</button>
+	<button ng-model="remove" ng-click="doRemove(person.firstName, person.lastName)">{{remove}}</button>
+	<button ng-model="load" ng-click="doLoad()">{{load}}</button>
+	<button ng-model="save" ng-click="doSave()">{{save}}</button>
+	<p>
+	<span ng-model="error">{{error}}</span>
+</div>
+
+</body>
+</html>
