@@ -10,14 +10,14 @@ sayHi("Cat", "Alice"); // 'Hi, Cat', then 'Hi, Alice'
 //add(3,4) //return 7 
 //add(3,4,5) //return 12 
 
-function add(a,b,c) {
-    var total=0;
-    for (var i=0; i<arguments.length; i++) {
-        total += arguments[i];
-        alert(total);
-    }
-}
-add(3, 4, 5); // 3, 7, 12
+function add(a,b,c) { 
+     var total=0; 
+     for (var i=0; i<arguments.length; i++) { 
+         total += arguments[i]; 
+         alert(total);  //noprotect
+     }
+ } 
+ add(3, 4, 5); 
  
  
 //2. implement function max(a,b,c...)
