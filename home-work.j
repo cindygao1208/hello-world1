@@ -87,6 +87,40 @@ myObject.func();
 var test = myObject.func; 
 test(); //all undefined -because "this" is undefined
 
+"outer func:  this.foo = bar"
+"outer func:  self.foo = bar"
+"inner func:  this.foo = undefined"
+"inner func:  self.foo = bar"
+"outer func:  this.foo = undefined"
+"outer func:  self.foo = undefined"
+"inner func:  this.foo = undefined"
+"inner func:  self.foo = undefined"
+
+
+//second test
+var myObject = {
+    foo: "bar",
+    func: function() {
+        var self = this;
+        console.log("outer func:  this.foo = " + this.foo); //bar
+        console.log("outer func:  self.foo = " + self.foo); //bar
+    }
+};
+(function() {
+             console.log("inner func:  this.foo = " + this.foo); //undefined
+             console.log("inner func:  self.foo = " + self.foo); //bar
+})();
+myObject.func(); 
+var test = myObject.func; 
+test(); //all undefined -because "this" is undefined
+
+"inner func:  this.foo = undefined"
+"inner func:  self.foo = undefined"
+"outer func:  this.foo = bar"
+"outer func:  self.foo = bar"
+"outer func:  this.foo = undefined"
+"outer func:  self.foo = undefined"
+
 //6.	Implement the following function. It should return the sum of the two numbers:
 //sum(3)(4); // returns 7
 
