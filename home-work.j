@@ -28,7 +28,7 @@ function add(a,b,c) {
 function max() {
     var biggest;
     for (var i=0; i<arguments.length; i++) {
-        if (i==0)
+        if (i===0)
             biggest = arguments[i];
         else {
             if (arguments[i]>biggest) {
