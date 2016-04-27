@@ -184,12 +184,9 @@ function foo1(arr) {
 
 <!DOCTYPE html>
 <html>
-
-
 <body>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-
-<script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script>
 	var app = angular.module('addressBook', []);
 	app.controller('addressBookControl', function($scope,$http) {
 		$scope.submit="Submit";
@@ -198,14 +195,14 @@ function foo1(arr) {
 		$scope.save="Save";
 		$scope.error="";
 		$scope.persons=[
-			{firstName:'Jani',lastName:'Norway'},
-			{firstName:'Hege',lastName:'Sweden'},
-			{firstName:'Kai',lastName:'Denmark'}];
-		$scope.doSubmit=function($firstName, $lastName) {
-			var newPerson = {firstName: $firstName, lastName: $lastName};
+			{firstName:'Jani',lastName:'Norway',telphone:'416-234-5632'},
+			{firstName:'Hege',lastName:'Sweden',telphone:'416-456-1204'},
+			{firstName:'Kai',lastName:'Denmark',telphone:'905-237-1208'}];
+		$scope.doSubmit = function ($firstName, $lastName, $telphone) {
+		    var newPerson = { firstName: $firstName, lastName: $lastName, telphone: $telphone};
 			$scope.persons.push(newPerson);
 		};
-		$scope.doRemove=function($firstName, $lastName) {
+		$scope.doRemove = function ($firstName, $lastName) {
 			var i, person;
 			for(i = 0; i < $scope.persons.length; i++) {
 				person = $scope.persons[i];
@@ -213,8 +210,9 @@ function foo1(arr) {
 					$scope.persons.splice(i,1);
 				}
 			}
-			$scope.person.firstName="";
-			$scope.person.lastName="";
+			$scope.person.firstName = "";
+			$scope.person.lastName = "";
+			$scope.person.telphone = "";
 		};
 		$scope.doLoad=function() {
 			$http.jsonp("data.json").then(function(response) {
@@ -238,28 +236,27 @@ function foo1(arr) {
 			a.dispatchEvent(e);
 		};
 	});
-</script>
+    </script>
 
+    <div ng-app="addressBook" ng-controller="addressBookControl" name="nameForm">
+        <p>First Name: <input type="text" ng-model="person.firstName"></p>
+        <p>Last Name: <input type="text" ng-model="person.lastName"></p>
+        <p>Telphone: <input type="text" ng-model="person.telphone"></p>
 
-<div ng-app="addressBook" ng-controller="addressBookControl" name="nameForm">
-
- 	<p>First Name: <input type="text" ng-model="person.firstName"></p>
-	<p>Last Name: <input type="text" ng-model="person.lastName"></p>
-	
- 	<table>
-		<tr ng-repeat="x in persons | filter : person">
-			<td>{{ x.firstName}}</td>
-			<td>{{x.lastName}}</td>
-		</tr>
-	</table>
-	<p>
-	<button ng-model="submit" ng-click="doSubmit(person.firstName, person.lastName)">{{submit}}</button>
-	<button ng-model="remove" ng-click="doRemove(person.firstName, person.lastName)">{{remove}}</button>
-	<button ng-model="load" ng-click="doLoad()">{{load}}</button>
-	<button ng-model="save" ng-click="doSave()">{{save}}</button>
-	<p>
-	<span ng-model="error">{{error}}</span>
-</div>
-
+        <table>
+            <tr ng-repeat="x in persons | filter : person">
+                <td>{{x.firstName}}</td>
+                <td>{{x.lastName}}</td>
+                <td>{{x.telphone}}</td>
+            </tr>
+        </table>
+        <p>
+            <button ng-model="submit" ng-click="doSubmit(person.firstName, person.lastName, person.telphone)">{{submit}}</button>
+            <button ng-model="remove" ng-click="doRemove(person.firstName, person.lastName)">{{remove}}</button>
+            <button ng-model="load" ng-click="doLoad()">{{load}}</button>
+            <button ng-model="save" ng-click="doSave()">{{save}}</button>
+        <p>
+            <span ng-model="error">{{error}}</span>
+    </div>
 </body>
 </html>
