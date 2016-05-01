@@ -237,6 +237,31 @@ function foo1(arr) {
 		};
 	});
     </script>
+<?php
+$username = "xianli_gao@hotmail.com";
+$password = "411661";
+$hostname = "DESKTOP-OC0M6FP"; 
+
+//connection to the database
+$dbhandle = mysql_connect($hostname, $username, $password) 
+ or die("Unable to connect to MySQL");
+echo "Connected to MySQL<br>";
+
+//select a database to work with
+$selected = mysql_select_db("AddressBook",$dbhandle) 
+  or die("Could not select examples");
+
+//execute the SQL query and return records
+$result = mysql_query("SELECT * FROM Employee");
+
+//fetch tha data from the database 
+while ($row = mysql_fetch_array($result)) {
+   echo "First Name:".$row{'FirstName'}." Last Name:".$row{'LastName'}."Phone No: ". //display the results
+   $row{'Phone'}."<br>";
+}
+//close the connection
+mysql_close($dbhandle);
+?>
 
     <div ng-app="addressBook" ng-controller="addressBookControl" name="nameForm">
         <p>First Name: <input type="text" ng-model="person.firstName"></p>
