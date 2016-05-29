@@ -1,0 +1,95 @@
+1.	What is Abstract class doing?
+A: It is running Java class or another class.
+
+2.	How to change CSS in Javascript?
+html>
+<body>
+<p id="p2">Hello World!</p>
+
+<script>
+document.getElementById("p2").style.color = "blue";
+</script>
+
+<p>The paragraph above was changed by a script.</p>
+</body>
+</html>
+
+	.batman {
+		Width: 100px;
+		Height: 100px;
+		Background-color: #333;
+}
+
+<div class=”batman”></div>
+
+
+3.	If there are more than 500 row in Page, I just want only show 500 rows what I should do?
+Loop using <script></script> to control.
+
+4.	If the page load very slow what are you doing to do?
+	A: i. gzip
+ii.	Delete cache
+iii.	minimize HTTP requests. 
+iv.	optimize images
+v.	cdn		Finally, resize elements before they are uploaded into the HTML.
+
+5.	What is your server for web application?
+A: Apache http web server + websphere server
+
+6.	What is your achievement?
+A: Actually I have many reward from Amex Express. CIBC and Scotiabank. But I think my biggest achievement is that I can learn any new skill very fast. My ability to not only develop clean and efficient code but to enhance add value to the projects I work on.
+
+7.	What is your bad experience?
+A: That was the time I was in Ingenium. I was working on migration from SQL server to Oracle. The timeline was too tight and my boss disagreed. I try ask more resource for the project. So finally we had one more resource working on it and we also did overtime to made project finished on time.  
+
+8.	What is web service you use?
+RESTFULL- it is for AngularJS, SOAP – for other
+
+9.	What is Credit Car Management System doing?
+Getting car information from every branches.
+
+10.	What is IDE?
+Eclipse
+
+11.	How to setup Spring dependency?
+Inversion of the control IOC, constructor set method in Configue file and @.....
+
+12.	How to get the result from JSON in script?
+Person: function(){
+		Ng-model(name).html(joson.Model.itemname(in json));
+		$("#G_ID").html(json.Model.G_ID);
+}
+
+13.	Did you use directive?
+It is for Form Template.
+
+14.	What is momoro if page over load?
+Forgot 
+15.	day stock price
+day 1    50
+day 2    400
+day 3    250
+day 4    100
+day 5     65
+day 6    500
+day 7    600
+
+best days to buy and sell a stock to make the max profit?
+day to buy, price
+day to sell, price
+
+function max() { 
+     var biggest; 
+     for (var i=0; i<arguments.length; i++) { 
+         if (i===0) 
+             biggest = arguments[i]; 
+         else { 
+             if (arguments[i]>biggest) { 
+                biggest=arguments[i]; 
+             } 
+         } 
+   } 
+   alert(biggest); 
+ } 
+ 
+ max(50, 400, 250,.....);
