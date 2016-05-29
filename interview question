@@ -1,5 +1,5 @@
 1.	What is Abstract class doing?
-A: It is running Java class or another class.
+A: It is running Java class or another class. It can not be instanced.
 
 2.	How to change CSS in Javascript?
 html>
