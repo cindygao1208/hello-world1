@@ -1,5 +1,6 @@
 1.	What is Abstract class doing?
-A: It is running Java class or another class. It can not be instanced.
+A: It is running Java class or another class. It can not be instanced. Marker interface is a design pattern(empty code inside) no body. 
+interface is better than Abstract class. Interface class once you designed you can't change it. UI framework using Abstract class.
 
 2.	How to change CSS in Javascript?
 html>
@@ -21,16 +22,21 @@ document.getElementById("p2").style.color = "blue";
 }
 
 <div class=”batman”></div>
+<script> (#.batman).removeclass; </script>
 
 
 3.	If there are more than 500 row in Page, I just want only show 500 rows what I should do?
-Loop using <script></script> to control.
+Loop using 
+<script>
+</script> to control. using cursor to control or separete page. from frontend.
 
-4.	If the page load very slow what are you doing to do?
-	A: i. gzip
+Database control from backend
+
+4.	If the page load very slow what are you going to do?
+	A: i. gzip (zip backend code and unzip from frontend)
 ii.	Delete cache
-iii.	minimize HTTP requests. 
-iv.	optimize images
+iii.	minimize HTTP requests. (minimize CSS-remove spaces and Javascript-remove spcace and change pramater name to shorter)
+iv.	optimize images (smaller size)
 v.	cdn		Finally, resize elements before they are uploaded into the HTML.
 
 5.	What is your server for web application?
@@ -59,12 +65,17 @@ Person: function(){
 		Ng-model(name).html(joson.Model.itemname(in json));
 		$("#G_ID").html(json.Model.G_ID);
 }
+------------------------------------------
+JSON.parse("name: 'cindy'");
+var obj = {name: 'cindy'}; 
+$("#G_ID").innerHTML =obj.name;
 
 13.	Did you use directive?
-It is for Form Template.
+Yes, It is for Form Template.
 
 14.	What is momoro if page over load?
 Forgot 
+
 15.	day stock price
 day 1    50
 day 2    400
@@ -93,3 +104,6 @@ function max() {
  } 
  
  max(50, 400, 250,.....);
+ -----------------------
+ var data = [50, 400, 250, 100, 65, 500, 600]
+ Math.max.apply(data, );
