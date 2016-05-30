@@ -1,0 +1,24 @@
+<div ng-app="myApp" ng-controller="formCtrl">
+  <form novalidate>
+    First Name:<br>
+    <input type="text" ng-model="user.firstName"><br>
+    Last Name:<br>
+    <input type="text" ng-model="user.lastName">
+     <br><br>
+    <button ng-click="show()">SHOW</button>
+  </form>
+   
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('formCtrl',  function($scope) {
+    var firstname = $scope.user.firstName 
+	$scope.show = function() {
+        return {
+            template: '<div>First Name: ' + firstname + '</div>'
+        };
+    };
+    $scope.show();
+});
+</script> 
