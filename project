@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html ng-app="app">
+<head>
+    <link href="~/Content/swiper.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <style type="text/css">
+        .swiper-container {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .swiper-slide {
+            background-size: cover;
+            background-position: center;
+        }
+
+        .swiper-menu {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 30px;
+            background-color: #000;
+            opacity: 0.6;
+            z-index: 10;
+        }
+
+            .swiper-menu .btn-swiper-menu {
+                margin: 0;
+                padding: 0;
+                background-color: transparent;
+                border: none;
+                color: #fff;
+                line-height: 30px;
+            }
+    </style>
+</head>
+<body>
+<form ng-controller="updateCtrl">
+    <div class="modal-body" ng->
+        <div class="form-group">
+            <label for="goods.G_Name">Goods Name<font color="red">*</font> </label>
+            <input type="text" ng-model="goods.G_Name" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="goods.G_Price">Goods Price<font color="red">*</font></label>
+            <input type="number" ng-model="goods.G_Price" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="goods.G_PriceMarket">Original Price</label>
+            <input type="number" ng-model="goods.G_PriceMarket" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="goods.G_Long">Long - Inches</label>
+            <input type="number" ng-model="goods.G_Long" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="goods.G_Width">Width - Inches</label>
+            <input type="number" ng-model="goods.G_Width" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="goods.G_High">High - Inches</label>
+            <input type="number" ng-model="goods.G_High" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="goods.G_PlaceOfOrigin">Place Of Origin</label>
+            <input type="text" ng-model="goods.G_PlaceOfOrigin" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="goods.G_Period">Period</label>
+            <input type="text" ng-model="goods.G_Period" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="goods.G_MaterialsAndTechniques">Materials And Techniques</label>
+            <input type="text" ng-model="goods.G_MaterialsAndTechniques" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="goods.G_Condition">Condition</label>
+            <input type="text" ng-model="goods.G_Condition" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="goods.G_Summary">Detail Description</label>
+            <textarea ng-model="goods.G_Summary" class="form-control" rows="5"></textarea>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <div class="form-group">
+            <button type="button" ng-model="update" ng-click="update()">Save</button>
+        </div>
+    </div>
+</form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
+<script>
+    angular.module('app', []);
+    angular.module('app').factory('model', ['$http', function ($http) {
+        var swiper;
+        var p = 0;
+
+        function saveGoodsCreate() {
+            if (!goods.G_Name) {
+                alert("Enter Goods Name!");
+                return;
+            }
+
+            if (!goods.G_Price) {
+                alert("Enter Goods Price!");
+                return;
+            }
+
+            if (!goods.G_PriceMarket) {
+                goods.G_PriceMarket = 0;
+            }
+            if (!goods.G_Long) {
+                product.G_Long = 0;
+            }
+            if (!goods.G_Width) {
+                goods.G_Width = 0;
+            }
+            if (!goods.G_High) {
+                goods.G_High = 0;
+            }
+            var op = {
+                G_DefaultImg: goods.G_DefaultImg,
+                G_Name: goods.G_Name,
+                G_Price: goods.G_Price,
+                G_PriceMarket: goods.G_PriceMarket,
+                G_Long: goods.G_Long,
+                G_Width: goods.G_Width,
+                G_High: goods.G_High,
+                G_PlaceOfOrigin: goods.G_PlaceOfOrigin,
+                G_Period: goods.G_Period,
+                G_MaterialsAndTechniques: goods.G_MaterialsAndTechniques,
+                G_Condition: goods.G_Condition,
+                G_Summary: goods.G_Summary,
+                G_SID: gsid
+            };
+            $.ajax({
+                url: host + "/StoreManage/Ajax_Update_GoodsCreate?callback=?",
+                type: "POST",
+                data: {
+                    jsonstr: JSON.stringify(op),
+                    checkj: j
+                },
+                dataType: "json",
+                success: function (json) {
+                    if (json.Status) {
+                        ///OpenMessage({ icon: 'Saved Successful!', msg: json.Message });
+                        alert("Goods saved successful!")
+                        document.location.reload(true);
+                    } else {
+                        ///OpenMessage({ icon: 'Error to save', msg: json.Message });
+                        alert("Error to save!")
+                    }
+                }
+            });
+        }
+
+        var ret = {
+            update: function () {
+                saveGoodsCreate();
+            }
+        };
+        return ret;
+    }]);
+
+    angular.module('app').controller('updateCtrl', ['$scope', 'model', function ($scope, model) {
+        $scope.goods = {
+            G_DefaultImg: '',
+            G_Name: '',
+            G_Price: 0,
+            G_PriceMarket: 0,
+            G_Long: 0,
+            G_Width: 0,
+            G_High: 0,
+            G_PlaceOfOrigin: '',
+            G_Period: '',
+            G_MaterialsAndTechniques: '',
+            G_Condition: '',
+            G_Summary: ''
+        };
+        $scope.update = function () {
+            model.update();
+        };
+    }]);
+
+</script>
+</body>
+</html>
