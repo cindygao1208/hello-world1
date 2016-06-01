@@ -1,0 +1,85 @@
+@ {var gsid = "test"}
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+</head>
+<body>
+    <form ng-controller="updateCtrl">
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="goods.G_Name">Goods Name<font color="red">*</font> </label>
+                <input type="text" ng-model="goods.G_Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="goods.G_Price">Goods Price<font color="red">*</font></label>
+                <input type="number" ng-model="goods.G_Price" class="form-control" />
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="form-group">
+                <button type="button" ng-model="update" ng-click="update()">Save</button>
+            </div>
+        </div>
+        <hidden ng-model="goods.G_SID" value="{{gsid}}">
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
+    <script>
+        angular.module('app', []);
+        angular.module('app').factory('model', ['$http', function ($http) {
+  
+            function saveGoodsCreate(goods) {
+                if (!goods.G_Name) {
+                    alert("Enter Goods Name!");
+                    return;
+                }
+
+                if (!goods.G_Price) {
+                    alert("Enter Goods Price!");
+                    return;
+                }
+
+                var op = {
+                    G_Name: goods.G_Name,
+                    G_Price: goods.G_Price,
+                    G_SID: '@gsid'
+                };
+                
+                $http({
+                    url: host + "/StoreManage/Ajax_Update_GoodsCreate?callback=?",
+                    method: "POST",
+                    data: { jsonstr: JSON.stringify(op) }
+                }).then(
+                    function (json) {
+                        if (json.Status) {
+                            ///OpenMessage({ icon: 'Saved Successful!', msg: json.Message });
+                            alert("Goods saved successful!")
+                            document.location.reload(true);
+                        } else {
+                            ///OpenMessage({ icon: 'Error to save', msg: json.Message });
+                            alert("Unsuccessful save!")
+                        }
+                    },
+                     function (e) {
+                         alert("Error to save!")
+                     }
+                 );
+            };
+
+            var ret = {
+                update: function (goods) {
+                    saveGoodsCreate(goods);
+                }
+            };
+            return ret;
+        }]);
+
+        angular.module('app').controller('updateCtrl', ['$scope', 'model', function ($scope, model) {
+            $scope.update = function () {
+                model.update($scope.goods);
+            };
+        }]);
+
+    </script>
+</body>
+</html>
