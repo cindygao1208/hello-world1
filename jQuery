@@ -64,15 +64,6 @@
                         <label for="G_PriceMarket">Original Price</label>
                         <input type="number" id="G_PriceMarket" name="G_PriceMarket" class="form-control">
                     </div>
-                    <div class="form-group" hidden>
-                        <label for="G_Count">Merchandise Code<font color="red">*</font></label>
-                        <input type="number" id="G_Count" name="G_Count" class="form-control" value="1">
-                    </div>
-                    <div class="form-group" hidden>
-                        <label for="G_GTID">Category</label>
-
-
-                    </div>
                     <div class="form-group">
                         <label for="G_Long">Long - Inches</label>
                         <input type="number" id="G_Long" name="G_Long" class="form-control">
@@ -151,11 +142,6 @@
                         return;
                     }
                     var nofitem = 1;
-                    //var nofitem = $("#G_NumberOfItem").val();
-                    //if (!nofitem) {
-                    //    alert("Enter Number of Item!");
-                    //    return;
-                    //}
                     var gprice = $("#G_Price").val();
                     if (!gprice) {
                         alert("Enter Goods Price!");
@@ -167,11 +153,6 @@
                         gpricem = 0;
                     }
                     var gcount = 1;
-                    //var gcount = $("#G_Count").val();
-                    //if (!gcount) {
-                    //    alert("Enter Goods Count!");
-                    //    return;
-                    //}
                     var gtid = $("#G_GTID").val();
                     var gtypec = $("#G_GTID option:selected").attr("data-code");
                     var glong = $("#G_Long").val();
@@ -190,35 +171,6 @@
                     if (!gfree) {
                         gfree = 0;
                     }
-                    var gnew = $("#G_New").prop("checked");
-                    var ghot = $("#G_Hot").prop("checked");
-                    var gdis = $("#G_Discount").prop("checked");
-                    var gstatus = $("#G_Status").prop("checked");
-                    var ggift = $("#G_Gift").prop("checked");
-
-                    //if (ggift) {
-                    var cgname = "gift";
-                    //var cgname = $("#CG_Name").val();
-                    //if (!cgname) {
-                    //    alert("Enter Gift Name!");
-                    //    return;
-                    //}
-                    var cgtype = 0;
-                    //var cgtype = $("#CG_Type").val();
-                    var cgdstart = "01/01/2116";
-                    //var cgdstart = $("#CG_DateShowStart").val();
-                    //if (!cgdstart) {
-                    //    alert("Enter Gift Show Start Date!");
-                    //    return;
-                    //}
-                    var cgdend = "01/01/2116";
-                    //var cgdend = $("#CG_DateShowEnd").val();
-                    //if (!cgdend) {
-                    //    alert("Enter Gift Show End Date!");
-                    //    return;
-                    //}
-                    //}
-
                     var gpforigin = $("#G_PlaceOfOrigin").val();
                     var gperiod = $("#G_Period").val();
                     var gmatech = $("#G_MaterialsAndTechniques").val();
@@ -243,17 +195,6 @@
                         G_Width: gwidth,
                         G_High: ghigh,
                         G_Freight: gfree,
-                        G_New: gnew,
-                        G_Hot: ghot,
-                        G_Discount: gdis,
-                        G_Status: gstatus,
-                        G_Gift: ggift,
-
-                        CG_Name: cgname,
-                        CG_Type: cgtype,
-                        CG_DateShowStart: cgdstart,
-                        CG_DateShowEnd: cgdend,
-
                         G_PlaceOfOrigin: gpforigin,
                         G_Period: gperiod,
                         G_MaterialsAndTechniques: gmatech,
