@@ -204,7 +204,7 @@
                         G_Summary: gsum,
                         G_Introduction: gintro,
                         G_Content: gcont,
-                        G_SID: 'gsid',
+                        G_SID: '@gsid',
                         G_Shop: shop
                     };
                     $.ajax({
