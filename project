@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <html ng-app="app">
 <head>
     <link href="~/Content/swiper.min.css" rel="stylesheet" />
@@ -37,7 +37,7 @@
 </head>
 <body>
 <form ng-controller="updateCtrl">
-    <div class="modal-body" ng->
+    <div class="modal-body">
         <div class="form-group">
             <label for="goods.G_Name">Goods Name<font color="red">*</font> </label>
             <input type="text" ng-model="goods.G_Name" class="form-control" />
@@ -98,7 +98,9 @@
         var swiper;
         var p = 0;
 
-        function saveGoodsCreate() {
+        function saveGoodsCreate(goods) {
+            console.log(goods);
+
             if (!goods.G_Name) {
                 alert("Enter Goods Name!");
                 return;
@@ -113,7 +115,7 @@
                 goods.G_PriceMarket = 0;
             }
             if (!goods.G_Long) {
-                product.G_Long = 0;
+                goods.G_Long = 0;
             }
             if (!goods.G_Width) {
                 goods.G_Width = 0;
@@ -134,17 +136,18 @@
                 G_MaterialsAndTechniques: goods.G_MaterialsAndTechniques,
                 G_Condition: goods.G_Condition,
                 G_Summary: goods.G_Summary,
-                G_SID: gsid
+                // G_SID: gsid
             };
-            $.ajax({
+            var host = "localhost";
+            $http({
                 url: host + "/StoreManage/Ajax_Update_GoodsCreate?callback=?",
-                type: "POST",
+                method: "POST",
                 data: {
                     jsonstr: JSON.stringify(op),
-                    checkj: j
-                },
-                dataType: "json",
-                success: function (json) {
+                    // checkj: j
+                }
+            }).then(
+                function (json) {
                     if (json.Status) {
                         ///OpenMessage({ icon: 'Saved Successful!', msg: json.Message });
                         alert("Goods saved successful!")
@@ -153,13 +156,16 @@
                         ///OpenMessage({ icon: 'Error to save', msg: json.Message });
                         alert("Error to save!")
                     }
+                },
+                function (e){
+                    alert("Error to save!")
                 }
-            });
-        }
+            );
+        };
 
         var ret = {
-            update: function () {
-                saveGoodsCreate();
+            update: function (goods) {
+                saveGoodsCreate(goods);
             }
         };
         return ret;
@@ -181,7 +187,7 @@
             G_Summary: ''
         };
         $scope.update = function () {
-            model.update();
+            model.update($scope.goods);
         };
     }]);
 
