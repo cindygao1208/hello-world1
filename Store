@@ -1,0 +1,268 @@
+@using RA.Models
+@model List<T_Store>
+
+@{
+    ViewBag.Title = "StoreManage_GoodsCreate";
+}
+@{
+    var list = ViewBag.G_GTID as List<T_GoodsType>;
+    var list1 = ViewBag.ShopList as List<T_Store>;
+    foreach (var item1 in list1)
+    {
+        var gsid = item1.S_ID;
+    }
+}
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <link href="~/Content/swiper.min.css" rel="stylesheet" />
+    <style type="text/css">
+        .swiper-container {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .swiper-slide {
+            background-size: cover;
+            background-position: center;
+        }
+
+        .swiper-menu {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 30px;
+            background-color: #000;
+            opacity: 0.6;
+            z-index: 10;
+        }
+
+            .swiper-menu .btn-swiper-menu {
+                margin: 0;
+                padding: 0;
+                background-color: transparent;
+                border: none;
+                color: #fff;
+                line-height: 30px;
+            }
+    </style>
+</head>
+<body>
+    <div class="modal-dialog">
+        <div class="swiper-container" ng-controller="pictureCtrl">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide text-center text-muted" ng-model="goods.G_DefaultImg" ng-click="pictureShow()" data-type="default" timeout="1"><i class="fa fa-camera fa-5x"></i></div>
+            </div>
+        </div>
+        <div class="swiper-container" ng-controller="swiperCtrl">
+            <div class="swiper-button-next" ng-model="goods.next"></div>
+            <div class="swiper-button-prev" ng-model="goods.prev"></div>
+
+        </div>
+    </div>
+
+    @*<div class="swiper-menu flex-row" ng-controller="camoraCtrl">
+               <button type="button" class="btn-swiper-menu flex-con" ng-model="goods.camera" ng-onclick="camora()"><i class="fa fa-camera" aria-hidden="true"></i></button>
+               <button type="button" class="btn-swiper-menu flex-con" ng-model="goods.library" ng-onclick="camora()"><i class="fa fa-folder-open" aria-hidden="true"></i></button>
+               <button type="button" class="btn-swiper-menu flex-con" ng-model="goods.remove" ng-onclick="camora()"><i class="fa fa-trash" aria-hidden="true"></i></button>
+        </div>*@
+
+    <div class="modal fade" ng-controller="camoraCtrl">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" ng-class="btn btn-default btn-block btn-swiper-menu" ng-model="goods.camera" ng-onclick="camora()"><div class="text-left">Take Photo <i class="fa fa-camera pull-right" aria-hidden="true"></i></div></button>
+                    <button type="button" ng-class="btn btn-default btn-block btn-swiper-menu" ng-model="goods.library" ng-onclick="camora()"><div class="text-left">Photo Library</div><i class="fa fa-folder-open pull-right" aria-hidden="true"></i></button>
+                    <button type="button" ng-class="btn btn-default btn-block btn-swiper-menu" ng-model="goods.remove" ng-onclick="camora()"><div class="text-left">Remove Photo</div><i class="fa fa-trash pull-right" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form ng-controller="updateCtrl">
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="goods.G_Name">Goods Name<font color="red">*</font> </label>
+                <input type="text" ng-model="goods.G_Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="goods.G_Price">Goods Price<font color="red">*</font></label>
+                <input type="number" ng-model="goods.G_Price" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="goods.G_PriceMarket">Original Price</label>
+                <input type="number" ng-model="goods.G_PriceMarket" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="goods.G_Long">Long - Inches</label>
+                <input type="number" ng-model="goods.G_Long" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="goods.G_Width">Width - Inches</label>
+                <input type="number" ng-model="goods.G_Width" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="goods.G_High">High - Inches</label>
+                <input type="number" ng-model="goods.G_High" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="goods.G_PlaceOfOrigin">Place Of Origin</label>
+                <input type="text" ng-model="goods.G_PlaceOfOrigin" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="goods.G_Period">Period</label>
+                <input type="text" ng-model="goods.G_Period" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="goods.G_MaterialsAndTechniques">Materials And Techniques</label>
+                <input type="text" ng-model="goods.G_MaterialsAndTechniques" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="goods.G_Condition">Condition</label>
+                <input type="text" ng-model="goods.G_Condition" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="goods.G_Summary">Detail Description</label>
+                <textarea ng-model="goods.G_Summary" class="form-control" rows="5"></textarea>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <div class="form-group">
+                <button type="button" ng-model="update" ng-click="update()">Save</button>
+            </div>
+        </div>
+        <hidden ng-model="goods.G_SID" value="{{gsid}}">
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
+    <script>
+        angular.module('app', []);
+        angular.module('app').factory('model', ['$http', function ($http) {
+            var swiper;
+            var p = 0;
+
+            function saveGoodsCreate(goods) {
+                var picture = [];
+                var i = 0;
+
+                if (p > 0) {
+                    $(".swiper-slide").each(function () {
+                        picture.push((this).children(".swiper-slide").attr("src"));
+                        i++;
+                    });
+                    dimg = picture[0];
+                } else {
+                    dimg = "Default";
+                    picture.push(dimg);
+                }
+                if (!goods.G_Name) {
+                    alert("Enter Goods Name!");
+                    return;
+                }
+
+                if (!goods.G_Price) {
+                    alert("Enter Goods Price!");
+                    return;
+                }
+
+                if (!goods.G_PriceMarket) {
+                    goods.G_PriceMarket = 0;
+                }
+                if (!goods.G_Long) {
+                    goods.G_Long = 0;
+                }
+                if (!goods.G_Width) {
+                    goods.G_Width = 0;
+                }
+                if (!goods.G_High) {
+                    goods.G_High = 0;
+                }
+
+                var op = {
+                    G_DefaultImg: goods.G_DefaultImg,
+                    G_Name: goods.G_Name,
+                    G_Price: goods.G_Price,
+                    G_PriceMarket: goods.G_PriceMarket,
+                    G_Long: goods.G_Long,
+                    G_Width: goods.G_Width,
+                    G_High: goods.G_High,
+                    G_PlaceOfOrigin: goods.G_PlaceOfOrigin,
+                    G_Period: goods.G_Period,
+                    G_MaterialsAndTechniques: goods.G_MaterialsAndTechniques,
+                    G_Condition: goods.G_Condition,
+                    G_Summary: goods.G_Summary,
+                    G_SID: '@gsid'
+                };
+                alert(gsid);
+                $http({
+                    url: host + "/StoreManage/Ajax_Update_GoodsCreate?callback=?",
+                    method: "POST",
+                    data: { jsonstr: JSON.stringify(op) }
+                }).then(
+                    function (json) {
+                        if (json.Status) {
+                            ///OpenMessage({ icon: 'Saved Successful!', msg: json.Message });
+                            alert("Goods saved successful!")
+                            document.location.reload(true);
+                        } else {
+                            ///OpenMessage({ icon: 'Error to save', msg: json.Message });
+                            alert("Unsuccessful save!")
+                        }
+                    },
+                     function (e) {
+                         alert("Error to save!")
+                     }
+                 );
+            };
+
+            var ret = {
+                camora: function () {
+                    swiperControl();
+                },
+
+                swiper: function () {
+                    swiper = new Swiper('goods.picture', {
+                        nextButton: goods.next,
+                        prevButton: goods.prev
+                    }
+                )
+                },
+
+                pictureShow: function () {
+                    goods.menu.modal('show');
+                },
+
+                update: function (goods) {
+                    saveGoodsCreate(goods);
+                }
+            };
+            return ret;
+        }]);
+
+        angular.module('app').controller('camoraCtrl', ['$scope', 'model', function ($scope, model) {
+            $scope.camora = function () {
+                model.camora();
+            };
+        }]);
+        angular.module('app').controller('swiperCtrl', ['$scope', 'model', function ($scope, model) {
+            $scope.swiper = function () {
+                model.swiper();
+            };
+        }]);
+        angular.module('app').controller('pictureCtrl', ['$scope', 'model', function ($scope, model) {
+            $scope.pictureShow = function () {
+                model.pictureShow();
+            };
+        }]);
+
+        angular.module('app').controller('updateCtrl', ['$scope', 'model', function ($scope, model) {
+            $scope.update = function () {
+                model.update($scope.goods);
+            };
+        }]);
+
+    </script>
+</body>
+</html>
