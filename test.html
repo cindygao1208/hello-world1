@@ -13,12 +13,8 @@
 <script>
 var app = angular.module('myApp', []);
 app.controller('formCtrl',  function($scope) {
-    var firstname = $scope.user.firstName 
 	$scope.show = function() {
-        return {
-            template: '<div>First Name: ' + firstname + '</div>'
-        };
+        alert($scope.user.firstName);
     };
-    $scope.show();
 });
 </script> 
