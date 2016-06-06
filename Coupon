@@ -1,0 +1,246 @@
+@using RA.Models
+@model List<T_Goods>
+
+@{
+    ViewBag.Title = "StoreManage_CouponCreate";
+}
+@{
+    //var list = ViewBag.G_GTID as List<T_GoodsType>;
+    var list1 = ViewBag.ShopList as List<T_Store>;
+    var store = ViewBag.Model as T_Store;
+    var slcsid = store.S_ID;
+}
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <link href="~/Content/swiper.min.css" rel="stylesheet" />
+    <style type="text/css">
+        .swiper-container {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .swiper-slide {
+            background-size: cover;
+            background-position: center;
+        }
+
+        .swiper-menu {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 30px;
+            background-color: #000;
+            opacity: 0.6;
+            z-index: 10;
+        }
+
+            .swiper-menu .btn-swiper-menu {
+                margin: 0;
+                padding: 0;
+                background-color: transparent;
+                border: none;
+                color: #fff;
+                line-height: 30px;
+            }
+    </style>
+</head>
+<body>
+    <form ng-controller="updateCtrl" ng-submit="doSomething()">
+        <div class="modal-body">
+            <div class="form-group" ng-controller="typeCtrl">
+                <label ng-model="SLC_Type">Coupon Type<font color="red">*</font></label>
+                <select ng-model="SLC_Type" ng-init="SLC_Type" ng-change="selectchange()" ng-options="x for x in offertype" class="form-control" required></select>
+            </div>
+            <div class="form-group">
+                <label ng-model="coupon.SLC_Name">Coupon Name</label>
+                <input type="text" ng-model="coupon.SLC_Name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label ng-model="coupon.SLC_Price">Coupon Price<font color="red">*</font></label>
+                <input type="number" ng-model="coupon.SLC_Price" class="form-control">
+            </div>
+            <div class="form-group">
+                <label ng-model="coupon.SLC_Count">Total Count<font color="red">*</font></label>
+                <input type="number" ng-model="coupon.SLC_Count" class="form-control">
+            </div>
+            <div class="form-group">
+                <label ng-model="coupon.SLC_CountSold">Sold Count<font color="red">*</font></label>
+                <input type="number" ng-model="coupon.SLC_CountSold" class="form-control">
+            </div>
+            <div class="form-group">
+                <label ng-model="coupon.SLC_CountUsed">Used Count<font color="red">*</font></label>
+                <input type="number" ng-model="coupon.SLC_CountUsed" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label ng-model="coupon.SLC_DateShowStart">Show Start Date<font color="red">*</font></label>
+                <input type="date" ng-model="coupon.SLC_DateShowStart" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label ng-model="coupon.SLC_DateShowEnd">Show End Date<font color="red">*</font></label>
+                <input type="date" ng-model="coupon.SLC_DateShowEnd" class="form-control">
+            </div>
+            <div class="form-group">
+                <label ng-model="coupon.SLC_DateValidityStart">Validity Start Date<font color="red">*</font></label>
+                <input type="date" ng-model="coupon.SLC_DateValidityStart" class="form-control">
+            </div>
+            <div class="form-group">
+                <label ng-model="coupon.SLC_DateValidityEnd">Validity End Date<font color="red">*</font></label>
+                <input type="date" ng-model="coupon.SLC_DateValidityEnd" class="form-control">
+            </div>
+            <div class="form-group">
+                <label ng-model="SLC_Summary">Summary</label>
+                <textarea ng-model="coupon.SLC_Summary" class="form-control" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <label ng-model="SLC_Introduction">Introduction</label>
+                <textarea ng-model="coupon.SLC_Introduction" class="form-control" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <label ng-model="SLC_Content">Details</label>
+                <textarea ng-model="coupon.SLC_Content" class="form-control"></textarea>
+            </div>
+            <div class="form-group hidden">
+                <label ng-model="coupon.SLC_OfferDesc1">Offer Description 1</label>
+                <input type="text" ng-model="coupon.SLC_OfferDesc1" class="form-control">
+            </div>
+            <div class="form-group hidden">
+                <label ng-model="coupon.SLC_OfferDesc2">Offer Description 2</label>
+                <input type="text" ng-model="coupon.SLC_OfferDesc2" class="form-control">
+            </div>
+
+            <div class="modal-footer">
+                <div class="form-group">
+                    <button type="submit" ng-model="update" ng-click="update()">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
+    <script>
+        angular.module('app', []);
+        angular.module('app').factory('model', ['$http', function ($http) {
+
+            function saveCouponCreate(coupon, $scope) {
+                var ctype = $scope.SLC_Type;
+                alert(ctype);
+                if ($scope.SLC_Type == "Special Offers") {
+                    var op = {
+                        CSO_SID: '@slcsid',
+                        CSO_Name: coupon.SLC_Name,
+                        CSO_Price: coupon.SLC_Price,
+                        CSO_Count: coupon.SLC_Count,
+                        CSO_CoutSold: coupon.SLC_CountSold,
+                        CSO_CountUsed: coupon.SLC_CountUsed,
+                        CSO_DateShowStart: coupon.SLC_DateShowStart,
+                        CSO_DateShowEnd: coupon.SLC_DateShowEnd,
+                        CSO_DateValidityStart: coupon.SLC_DateValidityStart,
+                        CSO_DateValidityEnd: coupon.SLC_DateValidityEnd,
+                        CSO_Summary: coupon.SLC_Summary,
+                        CSO_Introduction: coupon.SLC_Introduction,
+                        CSO_Content: coupon.SLC_Content
+                    };
+                } else if ($scope.SLC_Type == "Limited Time Offer") {
+                    var op = {
+                        CLTO_SID: '@slcsid',
+                        CLTO_Name: coupon.SLC_Name,
+                        CLTO_Price: coupon.SLC_Price,
+                        CLTO_Count: coupon.SLC_Count,
+                        CLTO_CoutSold: coupon.SLC_CountSold,
+                        CLTO_CountUsed: coupon.SLC_CountUsed,
+                        CLTO_DateShowStart: coupon.SLC_DateShowStart,
+                        CLTO_DateShowEnd: coupon.SLC_DateShowEnd,
+                        CLTO_DateValidityStart: coupon.SLC_DateValidityStart,
+                        CLTO_DateValidityEnd: coupon.SLC_DateValidityEnd,
+                        CLTO_Summary: coupon.SLC_Summary,
+                        CLTO_Introduction: coupon.SLC_Introduction,
+                        CLTO_Content: coupon.SLC_Content,
+                        CLTO_OfferDescript1: coupon.SLC_OfferDescript1,
+                        CLTO_OfferDescript2: coupon.SLC_OfferDescript2
+                    };
+                } else {
+                    var op = {
+                        CDZ_SID: '@slcsid',
+                        CDZ_Name: coupon.SLC_Name,
+                        CDZ_Price: coupon.SLC_Price,
+                        CDZ_Count: coupon.SLC_Count,
+                        CDZ_CoutSold: coupon.SLC_CountSold,
+                        CDZ_CountUsed: coupon.SLC_CountUsed,
+                        CDZ_DateShowStart: coupon.SLC_DateShowStart,
+                        CDZ_DateShowEnd: coupon.SLC_DateShowEnd,
+                        CDZ_DateValidityStart: coupon.SLC_DateValidityStart,
+                        CDZ_DateValidityEnd: coupon.SLC_DateValidityEnd,
+                        CDZ_Summary: coupon.SLC_Summary,
+                        CDZ_Introduction: coupon.SLC_Introduction,
+                        CDZ_Content: coupon.SLC_Content
+                    };
+                }
+                alert(4);
+
+                host = "http://localhost:55423/";
+                $http({
+                    url: host + "/StoreManage/Http_Update_CouponCreate?",
+                    method: "POST",
+                    data: { jsonstr: JSON.stringify(op), ctype: ctype }
+                }).then(
+                   function (json) {
+                       if (json.Status) {
+                           ///OpenMessage({ icon: 'Saved Successful!', msg: json.Message });
+                           alert("Coupon saved successful!")
+                           document.location.reload(true);
+                       } else {
+                           ///OpenMessage({ icon: 'Error to save', msg: json.Message });
+                           alert("Unsuccessful save!")
+                       }
+                   },
+                    function (e) {
+                        alert("Error to save!")
+                    }
+                );
+            };
+
+            var ret = {
+            //getUserDevice()
+
+            update: function (coupon, $scope) {
+                alert(2);
+                saveCouponCreate(coupon, $scope);
+            },
+            selectchange: function ($scope) {
+                if ($scope.SLC_Type == "Limited Time Offer") {
+                    //show hidden text box;
+                }
+            }
+        };
+        return ret;
+    }]);
+
+    
+    angular.module('app').controller('typeCtrl', ['$scope', 'model', function ($scope, model) {
+        $scope.offertype = ["Special Offers", "Limited Time Offer", "Coupon Dollar Zone"];
+        $scope.SLC_Type = $scope.offertype[0];
+        $scope.selectchange = function ($scope) {
+            model.selectchange($scope);
+        }
+    }]);
+
+    angular.module('app').controller('updateCtrl', ['$scope', 'model', function ($scope, model) {
+        $scope.update = function () {
+ /*           if (!$scope.coupon.SLC_Price || $scope.coupon.SLC_Count ||
+                !$scope.coupon.SLC_CountSold || !$scope.coupon.SLC_CountUsed ||
+                !$scope.coupon.SLC_DateShowStart || !$scope.coupon.SLC_DateShowEnd ||
+                !$scope.coupon.SLC_DateValidityStart || !$scope.coupon.SLC_DateValidityEnd) {
+                return;
+            };*/
+            alert($scope.SLC_Type);
+            model.update($scope.coupon, $scope);
+        };
+    }]);
+
+
+    </script>
+</body>
+</html>
