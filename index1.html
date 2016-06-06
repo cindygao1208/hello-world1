@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+    <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
+    </head>
+    <body ng-app="app">
+    <div ng-controller="controller">
+    <select ng-model="data.selected" ng-change="selectchange()">
+        <option ng-repeat="o in data.options" value="{{o.id}}">{{o.name}}</option>
+    </select>
+    <br><br><br><br><br>
+    <span>{{idid}}</span>
+    <span>{{namename}}</span>
+    </div>
+    <script>
+        var app = angular.module('app', []);
+        app.controller('controller', ['$scope', function($scope){
+            $scope.idid = "";
+            $scope.namename = "";
+            $scope.data = {
+                selected: null,
+                options: [
+                    {id: '0', name: 'tomato'},
+                    {id: '1', name: 'apple'},
+                    {id: '2', name: 'orange'}
+                  
+                ],
+            };
+            $scope.selectchange= function(){
+                $scope.idid = $scope.data.selected;
+                $scope.namename = $scope.data.options[$scope.data.selected].name;
+            }
+        }]);
+    </script>
+    </body>
+</html>
