@@ -1,3 +1,6 @@
+
+<!DOCTYPE html>
+<html ng-app="app">
 	<div class="form-group" ng-controller="typeCtrl">
 		<label ng-model="coupon.SLC_Type">Coupon Type<font color="red">*</font></label>
 		<select ng-model="coupon.SLC_Type" ng-init="coupon.SLC_Type" ng-change="selectchange()" ng-options="x for x in offertype" 
