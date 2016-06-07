@@ -39,6 +39,8 @@
     angular.module('app').controller('typeCtrl', ['$scope', 'model', function ($scope, model) {
         $scope.offertype = ["Special Offers", "Limited Time Offer", "Coupon Dollar Zone"];
         $scope.coupon = { SLC_Type: $scope.offertype[0] };
+        $scope.OfferDesc = false;
+        
         $scope.selectchange = function () {
             $scope.OfferDesc = model.selectchange($scope.coupon);
             alert($scope.OfferDesc);
