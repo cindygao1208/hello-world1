@@ -1,0 +1,46 @@
+	<div class="form-group" ng-controller="typeCtrl">
+		<label ng-model="coupon.SLC_Type">Coupon Type<font color="red">*</font></label>
+		<select ng-model="coupon.SLC_Type" ng-init="coupon.SLC_Type" ng-change="selectchange()" ng-options="x for x in offertype" 
+		class="form-control" required></select>
+	</div>
+
+	<div class="form-group" ng-show="OfferDesc">
+		<label ng-model="coupon.SLC_OfferDesc1">Offer Description 1</label>
+		<input type="text" ng-model="coupon.SLC_OfferDesc1" class="form-control">
+	</div>
+	<div class="form-group" ng-show ="OfferDesc">
+		<label ng-model="coupon.SLC_OfferDesc2">Offer Description 2</label>
+		<input type="text" ng-model="coupon.SLC_OfferDesc2" class="form-control">
+	</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
+<script>
+
+	angular.module('app', []);
+	angular.module('app').factory('model', ['$http', function ($http) {
+
+		var ret = {
+
+			selectchange: function (coupon) {
+				alert(coupon.SLC_Type);
+				if (coupon.SLC_Type == "Limited Time Offer") {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		};
+		return ret;
+	}]);
+    
+    angular.module('app').controller('typeCtrl', ['$scope', 'model', function ($scope, model) {
+        $scope.offertype = ["Special Offers", "Limited Time Offer", "Coupon Dollar Zone"];
+        $scope.coupon = { SLC_Type: $scope.offertype[0] };
+        $scope.selectchange = function () {
+            $scope.OfferDesc = model.selectchange($scope.coupon);
+            alert($scope.OfferDesc);
+        }
+    }]);
+
+
+</script>
