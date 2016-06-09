@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <link href="~/Content/swiper.min.css" rel="stylesheet" />
+    <style type="text/css">
+        .div-1 {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 18px;
+            text-align: center;
+            color: gray
+        }
+
+        .div-2 {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            color: black;
+            margin: 10px 
+        }
+
+        .btn-1 {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            color: white;
+            background-color:green
+        }
+   
+       .btn-2 {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            color:white;
+            background-color:red
+        }
+  
+    </style>
+</head>
+<body>
+    <div class="div-1" style="margin: 5px">
+        Tell Us About Youself
+    </div>
+    <div class="div-2" style="text-align:center">
+        Thanks for choosing TD insurance! in order to safely set up your new 
+        accounts and services, please tell us about yourself
+    </div>
+
+    <div class="div-1" style="margin: 30px">
+        Personal Information
+    </div>
+
+    <form ng-submit="doSomething()" ng-controller="cancelCtrl">
+        <div class="modal-body" ng-controller="submitCtrl">
+            <div class="form-group">
+                <select ng-model="person.Title" ng-init="person.Title" ng-change="loadChart(1)" ng-options="t for t in title" class="form-control" required> </select>
+            </div>
+            <div class="form-group">
+                <input type="text" ng-model="person.FirstName" class="form-control" autofocus placeholder="First Name*" required>
+            </div>
+            <div class="form-group">
+                <input type="text" ng-model="person.MidName" class="form-control" autofocus placeholder="Middle Initial">
+            </div>
+            <div class="form-group">
+                <input type="text" ng-model="person.LastName" class="form-control" autofocus placeholder="Last Name*" required>
+            </div>
+            <div class="form-group">
+                <input type="email" ng-model="person.EmailAdress" class="form-control" autofocus placeholder="Email Address*" required>
+            </div>
+            <div class="form-group">
+                <input type="text" ng-model="person.DateBirth" class="form-control" placeholder="Date of Birth*" onfocus="(this.type='date')" required>
+            </div>
+
+            <div class="form-group">
+                <input type="number" ng-model="person.SIN" class="form-control" autofocus placeholder="Social Insurance Number*" required>
+            </div>
+        
+            <div class="modal-footer">
+                <div class="form-group" style="margin:30px">
+                    <button type="submit" ng-model="cancelb" class="btn-2" ng-click="cancelb()">Cancel</button>
+                    <button type="submit" ng-model="submitb" class="btn-1" ng-click="submitb()">Submit</button>
+                </div>
+                <div class="div-2" style="text-align:left">
+                    You are apply for:
+                </div>
+                <div class="div-1" style="margin: 30px">
+                    TD Travel Medical Insurance
+                </div>
+                <div class="div-2" style="text-align:center">
+                    <button href="https://seemorecoverageoption.html" class="btn-1">See More Coverage Option</button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
+    <script>
+        angular.module('app', []);
+        angular.module('app').factory('model', ['$http', function ($http) {
+
+            function savePerson(person) {
+                alert(3);
+                var op = {
+                    Title: person.Title,
+                    FirstName: person.FirstName,
+                    MidName: person.MidName,
+                    LastName: person.LastName,
+                    EmailAddress: person.EmailAddress,
+                    DateBirth: person.DateBirth,
+                    SIN: person.SIN
+                }
+                
+                host = "http://localhost:55423/";
+                $http({
+                    url: host + "/StoreManage/Http_Save_Person?",
+                    method: "POST",
+                    data: { jsonstr: JSON.stringify(op) }
+                }).then(
+                    function (response) {
+                        var json = response.data;
+                        if (json.Status) {
+                            alert("Your personal info saved successful!")
+                            document.location.reload(true);
+                        } else {
+                            alert("Unsuccessful save your personal info!")
+                        }
+                    },
+                     function (e) {
+                         alert("Error to save!")
+                     }
+                 );
+            };
+
+        var ret = {
+
+            cancelb: function() {
+                app.directive("required", function ($rootScope) {
+                    return {
+                        link: function (scope, element, attrs) {
+                            element.remove();
+                        }
+                    }
+                });
+            },
+            
+            submitb: function (person) {
+                alert(2);
+                savePerson(person);
+            }
+        };
+        return ret;
+    }]);
+
+    angular.module('app').controller('cancelCtrl', ['$scope', 'model', function ($scope, model) {
+        $scope.title = ["Mr.", "Mrs.", "Ms."];
+        //$scope.person = { Title: $scope.title[0] };
+
+        $scope.cancelb = function() {
+            document.location.reload(true);
+        }
+    }]);
+
+    angular.module('app').controller('submitCtrl', ['$scope', 'model', function ($scope, model) {
+        
+        //if ($scope.person.FirstName == undefined  || $scope.person.LastName == undefined ||
+        //    $scope.person.EmailAddress == undefined || !$scope.person.DateBirth == undefined ||
+        //    $scope.person.SIN == undefined) {
+        //   return;
+        //}
+
+
+        $scope.submitb = function () {
+            alert(1);
+            model.submitb($scope.person);
+        };
+    }]);
+
+//    angular.directive('select', function ($interpolate) {
+//        alert(0);
+//        return {
+//            restrict: 'E',
+//            require: 'ngModel',
+//            link: function (scope, elem, attrs, ctrl) {
+//                var defaultOptionTemplate;
+//                scope.defaultOptionText = attrs.defaultOption || 'Title*';
+//                defaultOptionTemplate = '<option value="" disabled selected style="display: none;">{{defaultOptionText}}</option>';
+//                elem.prepend($interpolate(defaultOptionTemplate)(scope));
+//            }
+//        };
+//    });
+
+</script>
+</body>
+</html>
